@@ -12,7 +12,7 @@
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.cjs"
             ],
-            "preLaunchTask": "npm: build:linked"
+            "preLaunchTask": "npm: build"
         },
         {
             "name": "Attach to server",

@@ -8,10 +8,8 @@ The server is **bundled into the extension** (`dist/server.cjs`, built from
 the `luaut-language-server` package), so a packaged `.vsix` is
 self-contained: no npm install on the user's machine, no path to configure.
 
-While the server is not on npm yet, it is linked from the checkout next door
-(`file:../luaut-language-server`) — swap that for a version range once it is
-published. `npm run build:linked` rebuilds the server first; plain
-`npm run build` assumes it is already built.
+The server comes from npm like any other dependency, so this project builds
+on its own — no checkout of anything else required.
 
 ## Three ways to run it
 
@@ -19,7 +17,7 @@ published. `npm run build:linked` rebuilds the server first; plain
 
 ```bash
 npm install
-npm run build:linked   # rebuild the linked server, then the extension
+npm run build
 ```
 
 Open **this folder** in VS Code and press <kbd>F5</kbd>. A second window opens

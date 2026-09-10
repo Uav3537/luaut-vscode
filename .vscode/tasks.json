@@ -3,13 +3,13 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "build:linked",
+            "script": "build",
             "problemMatcher": "$tsc",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "label": "npm: build:linked"
+            "label": "npm: build"
         }
     ]
 }
