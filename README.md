@@ -62,7 +62,7 @@ npm run publish            # or: npx vsce publish minor
 ```
 
 For the VS Codium / Cursor / Gitpod side, publish the same `.vsix` to
-[Open VSX](https://open-vsx.org): `npx ovsx publish luaut-vscode-0.1.0.vsix -p <token>`.
+[Open VSX](https://open-vsx.org): `npx ovsx publish luaut-vscode-<version>.vsix -p <token>`.
 
 Before the first publish, add a `LICENSE` file (vsce warns without one) and,
 if you want the listing to look finished, a 128×128 `icon`.
