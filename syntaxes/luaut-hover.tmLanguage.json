@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "luaut-hover",
+  "scopeName": "source.luaut-hover",
+  "comment": "Colours the code block in a luaut hover. That text is not user code: the language server writes it in a fixed format (`const x: T`, `(parameter) n: T`, `declare function f(a: T) -> R`, `type A<T> = ...`), so these rules describe that format exactly. The editor itself is coloured by the parser through semantic tokens.",
+  "patterns": [
+    { "include": "#overloads" },
+    { "include": "#label" },
+    { "include": "#string" },
+    { "include": "#number" },
+    { "include": "#declaration" },
+    { "include": "#keyword" },
+    { "include": "#constant" },
+    { "include": "#primitive" },
+    { "include": "#member" },
+    { "include": "#type-name" },
+    { "include": "#operator" },
+    { "include": "#identifier" }
+  ],
+  "repository": {
+    "overloads": {
+      "name": "comment.overloads.luaut-hover",
+      "match": "\\(\\+[0-9]+ overloads?\\)"
+    },
+    "label": {
+      "match": "^(\\()(parameter|global|property|type parameter|loop variable)(\\))",
+      "captures": {
+        "1": { "name": "punctuation.definition.label.luaut-hover" },
+        "2": { "name": "storage.modifier.luaut-hover" },
+        "3": { "name": "punctuation.definition.label.luaut-hover" }
+      }
+    },
+    "string": {
+      "patterns": [
+        { "name": "string.quoted.double.luaut-hover", "match": "\"(?:[^\"\\\\]|\\\\.)*\"" },
+        { "name": "string.template.luaut-hover", "match": "`[^`]*`" }
+      ]
+    },
+    "number": {
+      "name": "constant.numeric.luaut-hover",
+      "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "match": "\\b(type)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.luaut-hover" },
+            "2": { "name": "entity.name.type.luaut-hover" }
+          }
+        },
+        {
+          "match": "\\b(function)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.function.luaut-hover" },
+            "2": { "name": "entity.name.function.luaut-hover" }
+          }
+        },
+        {
+          "match": "\\b(const|let|declare)\\s+(?!function\\b|type\\b)([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.luaut-hover" },
+            "2": { "name": "variable.other.readwrite.luaut-hover" }
+          }
+        }
+      ]
+    },
+    "keyword": {
+      "name": "storage.type.luaut-hover",
+      "match": "\\b(const|let|type|declare|function|readonly|infer|extends|keyof|typeof|in|is|asserts)\\b"
+    },
+    "constant": {
+      "name": "constant.language.luaut-hover",
+      "match": "\\b(true|false|nil)\\b"
+    },
+    "primitive": {
+      "name": "support.type.primitive.luaut-hover",
+      "match": "\\b(any|unknown|never|boolean|number|string|thread|buffer)\\b"
+    },
+    "member": {
+      "comment": "A name followed by `:` — a property, parameter or binding.",
+      "match": "\\b([A-Za-z_][A-Za-z0-9_]*)(\\??)(?=\\s*:)",
+      "captures": {
+        "1": { "name": "variable.other.property.luaut-hover" },
+        "2": { "name": "keyword.operator.optional.luaut-hover" }
+      }
+    },
+    "type-name": {
+      "name": "entity.name.type.luaut-hover",
+      "match": "\\b[A-Z][A-Za-z0-9_]*\\b"
+    },
+    "operator": {
+      "name": "keyword.operator.luaut-hover",
+      "match": "->|\\.\\.\\.|[|&?=-]"
+    },
+    "identifier": {
+      "name": "variable.other.luaut-hover",
+      "match": "\\b[a-z_][A-Za-z0-9_]*\\b"
+    }
+  }
+}

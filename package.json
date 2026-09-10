@@ -39,6 +39,11 @@
         "language": "luaut",
         "scopeName": "source.luaut",
         "path": "./syntaxes/luaut.tmLanguage.json"
+      },
+      {
+        "language": "luaut-hover",
+        "scopeName": "source.luaut-hover",
+        "path": "./syntaxes/luaut-hover.tmLanguage.json"
       }
     ],
     "configuration": {
