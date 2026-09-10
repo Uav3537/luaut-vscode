@@ -3,108 +3,212 @@
   "name": "luaut",
   "scopeName": "source.luaut",
   "patterns": [
-    { "include": "#comment" },
-    { "include": "#string" },
-    { "include": "#number" },
-    { "include": "#keyword" },
-    { "include": "#type-keyword" },
-    { "include": "#constant" },
-    { "include": "#declaration" },
-    { "include": "#call" },
-    { "include": "#operator" },
-    { "include": "#identifier" }
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#string"
+    },
+    {
+      "include": "#number"
+    },
+    {
+      "include": "#declaration"
+    },
+    {
+      "include": "#keyword"
+    },
+    {
+      "include": "#type-keyword"
+    },
+    {
+      "include": "#constant"
+    },
+    {
+      "include": "#call"
+    },
+    {
+      "include": "#operator"
+    },
+    {
+      "include": "#identifier"
+    }
   ],
   "repository": {
     "comment": {
       "patterns": [
-        { "name": "comment.block.luaut", "begin": "--\[\[", "end": "\]\]" },
-        { "name": "comment.line.double-dash.luaut", "match": "--.*$" }
+        {
+          "name": "comment.block.luaut",
+          "begin": "--\\[(=*)\\[",
+          "end": "\\]\\1\\]"
+        },
+        {
+          "name": "comment.line.double-dash.luaut",
+          "match": "--.*$"
+        }
       ]
     },
     "string": {
       "patterns": [
         {
           "name": "string.quoted.double.luaut",
-          "begin": "\"", "end": "\"",
-          "patterns": [{ "name": "constant.character.escape.luaut", "match": "\\." }]
-        },
-        {
-          "name": "string.quoted.single.luaut",
-          "begin": "'", "end": "'",
-          "patterns": [{ "name": "constant.character.escape.luaut", "match": "\\." }]
-        },
-        {
-          "name": "string.template.luaut",
-          "begin": "`", "end": "`",
+          "begin": "\"",
+          "end": "\"",
           "patterns": [
-            { "name": "constant.character.escape.luaut", "match": "\\." },
             {
-              "name": "meta.embedded.luaut",
-              "begin": "\$\{", "end": "\}",
-              "beginCaptures": { "0": { "name": "punctuation.definition.template-expression.luaut" } },
-              "endCaptures": { "0": { "name": "punctuation.definition.template-expression.luaut" } },
-              "patterns": [{ "include": "$self" }]
+              "name": "constant.character.escape.luaut",
+              "match": "\\."
             }
           ]
         },
-        { "name": "string.quoted.other.luaut", "begin": "\[\[", "end": "\]\]" }
+        {
+          "name": "string.quoted.single.luaut",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.luaut",
+              "match": "\\."
+            }
+          ]
+        },
+        {
+          "name": "string.template.luaut",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            {
+              "name": "constant.character.escape.luaut",
+              "match": "\\."
+            },
+            {
+              "name": "meta.template.expression.luaut",
+              "begin": "\\$\\{",
+              "end": "\\}",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.template-expression.begin.luaut"
+                }
+              },
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.template-expression.end.luaut"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "$self"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.other.multiline.luaut",
+          "begin": "\\[(=*)\\[",
+          "end": "\\]\\1\\]"
+        }
       ]
     },
     "number": {
       "name": "constant.numeric.luaut",
-      "match": "\b(0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(\.[0-9_]+)?([eE][+-]?[0-9]+)?)\b"
+      "match": "\\b(0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(\\.[0-9_]+)?([eE][+-]?[0-9]+)?)\\b"
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "match": "\\b(function)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.function.luaut"
+            },
+            "2": {
+              "name": "entity.name.function.luaut"
+            }
+          }
+        },
+        {
+          "match": "\\b(type)\\s+([A-Za-z_][A-Za-z0-9_]*)(?=\\s*[<=])",
+          "captures": {
+            "1": {
+              "name": "storage.type.type.luaut"
+            },
+            "2": {
+              "name": "entity.name.type.luaut"
+            }
+          }
+        },
+        {
+          "match": "\\b(const|let)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.luaut"
+            },
+            "2": {
+              "name": "variable.other.declaration.luaut"
+            }
+          }
+        }
+      ]
     },
     "keyword": {
       "patterns": [
         {
           "name": "keyword.control.luaut",
-          "match": "\b(if|then|elseif|else|end|for|in|while|do|repeat|until|break|continue|return)\b"
+          "match": "\\b(if|then|elseif|else|end|for|in|while|do|repeat|until|break|continue|return)\\b"
         },
         {
-          "name": "keyword.declaration.luaut",
-          "match": "\b(const|let|function|type|declare|export|import|from|as)\b"
+          "name": "storage.type.luaut",
+          "match": "\\b(const|let|function|type|declare)\\b"
         },
-        { "name": "keyword.operator.word.luaut", "match": "\b(and|or|not|satisfies|is|asserts|keyof|infer|readonly)\b" }
+        {
+          "name": "keyword.control.import.luaut",
+          "match": "\\b(export|import|from|as)\\b"
+        },
+        {
+          "name": "keyword.operator.expression.luaut",
+          "match": "\\b(and|or|not|satisfies|is|asserts|keyof|infer|readonly|typeof)\\b"
+        }
       ]
     },
     "type-keyword": {
       "name": "support.type.primitive.luaut",
-      "match": "\b(any|unknown|never|nil|boolean|number|string|thread|buffer|self)\b"
+      "match": "\\b(any|unknown|never|nil|boolean|number|string|thread|buffer)\\b"
     },
     "constant": {
-      "name": "constant.language.luaut",
-      "match": "\b(true|false)\b"
-    },
-    "declaration": {
       "patterns": [
         {
-          "match": "\b(function)\s+([A-Za-z_][A-Za-z0-9_]*)",
-          "captures": {
-            "1": { "name": "keyword.declaration.luaut" },
-            "2": { "name": "entity.name.function.luaut" }
-          }
+          "name": "constant.language.luaut",
+          "match": "\\b(true|false|nil)\\b"
         },
         {
-          "match": "\b(type)\s+([A-Za-z_][A-Za-z0-9_]*)",
-          "captures": {
-            "1": { "name": "keyword.declaration.luaut" },
-            "2": { "name": "entity.name.type.luaut" }
-          }
+          "name": "variable.language.self.luaut",
+          "match": "\\bself\\b"
         }
       ]
     },
     "call": {
-      "match": "([A-Za-z_][A-Za-z0-9_]*)\s*(?=[({\"'`])",
-      "captures": { "1": { "name": "entity.name.function.call.luaut" } }
+      "match": "([A-Za-z_][A-Za-z0-9_]*)\\s*(?=[(\\\"'`{])",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.luaut"
+        }
+      }
     },
     "operator": {
       "name": "keyword.operator.luaut",
-      "match": "(\+|-|\*|/|//|%|\^|#|==|~=|<=|>=|<|>|=|\.\.\.|\.\.|->|\?|:|\|&)"
+      "match": "->|\\.\\.\\.|\\.\\.|==|~=|<=|>=|//|[-+*/%^#<>=?:|&]"
     },
     "identifier": {
       "patterns": [
-        { "name": "variable.other.constant.luaut", "match": "\b[A-Z][A-Z0-9_]{2,}\b" },
-        { "name": "variable.other.luaut", "match": "\b[A-Za-z_][A-Za-z0-9_]*\b" }
+        {
+          "name": "entity.name.type.luaut",
+          "match": "\\b[A-Z][A-Za-z0-9_]*\\b"
+        },
+        {
+          "name": "variable.other.readwrite.luaut",
+          "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b"
+        }
       ]
     }
   }

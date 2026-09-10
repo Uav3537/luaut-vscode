@@ -1,9 +1,9 @@
 {
   "name": "luaut-vscode",
   "displayName": "luaut",
-  "description": "luaut language support — diagnostics, hover, completion, go-to-definition",
+  "description": "luaut language support \u2014 diagnostics, hover, completion, go-to-definition",
   "version": "0.1.0",
-  "publisher": "luaut",
+  "publisher": "uav1010",
   "license": "ISC",
   "engines": {
     "vscode": "^1.85.0"
@@ -69,7 +69,8 @@
     "watch": "tsup --watch",
     "package": "npm run build && vsce package",
     "publish": "npm run build && vsce publish",
-    "vscode:prepublish": "npm run build"
+    "vscode:prepublish": "npm run build",
+    "reinstall": "npm run package && code --install-extension luaut-vscode-0.1.0.vsix --force"
   },
   "devDependencies": {
     "@types/node": "^22.20.2",

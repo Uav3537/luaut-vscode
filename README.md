@@ -32,11 +32,12 @@ launch configuration while the dev window is open (port 6009).
 ### 2. Install it into your own VS Code
 
 ```bash
-npm run package                              # -> luaut-vscode-0.1.0.vsix
-code --install-extension luaut-vscode-0.1.0.vsix
+npm run reinstall    # package, then install into your VS Code
 ```
 
-Then reload VS Code. `code --uninstall-extension luaut.luaut-vscode` removes
+Then **Developer: Reload Window** — the installed extension is a copy, so
+`npm run build` alone changes nothing you can see there (that is what F5 is
+for). `code --uninstall-extension luaut.luaut-vscode` removes
 it. (Or: Extensions view → `...` → **Install from VSIX…**.)
 
 This is also the file to hand someone else — it runs anywhere without a
