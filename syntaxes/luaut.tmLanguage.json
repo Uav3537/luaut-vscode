@@ -105,7 +105,7 @@
         },
         {
           "name": "string.quoted.other.multiline.luaut",
-          "begin": "\\[(=*)\\[",
+          "begin": "\\[(=+)\\[",
           "end": "\\]\\1\\]"
         }
       ]
