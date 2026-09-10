@@ -1,0 +1,15 @@
+-- Hover anything, ctrl-click a name, type `part.` — the server is answering.
+
+const part = Instance.new("Part")
+part.Name = "Hello"
+
+-- Narrowing: hover `child` on each line.
+const function nameOf(child: Instance | nil): string
+    if child == nil then return "" end
+    return child.Name
+end
+
+-- A deliberate error, so you can see diagnostics arrive as you type.
+const wrong: number = "not a number"
+
+print(nameOf(part), wrong)

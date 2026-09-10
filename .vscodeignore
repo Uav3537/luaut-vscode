@@ -1,0 +1,9 @@
+# Everything ships as a bundle in dist/, so the sources and tooling stay out.
+.vscode/**
+node_modules/**
+src/**
+sample/**
+tsconfig.json
+tsup.config.ts
+.gitignore
+**/*.map

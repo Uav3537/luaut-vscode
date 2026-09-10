@@ -1,0 +1,88 @@
+{
+  "name": "luaut-vscode",
+  "displayName": "luaut",
+  "description": "luaut language support — diagnostics, hover, completion, go-to-definition",
+  "version": "0.1.0",
+  "publisher": "luaut",
+  "license": "ISC",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./dist/extension.cjs",
+  "activationEvents": [
+    "onLanguage:luaut"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "luaut",
+        "aliases": [
+          "luaut",
+          "Luaut"
+        ],
+        "extensions": [
+          ".luaut",
+          ".d.luaut"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "luaut",
+        "scopeName": "source.luaut",
+        "path": "./syntaxes/luaut.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "luaut",
+      "properties": {
+        "luaut.server.path": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to a luaut-language-server build (dist/cli.js). Empty uses the one bundled with this extension."
+        },
+        "luaut.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Log LSP traffic to the luaut output channel."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "luaut.restartServer",
+        "title": "luaut: Restart Language Server"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:linked": "npm --prefix ../luaut-language-server run build && tsup",
+    "watch": "tsup --watch",
+    "package": "npm run build && vsce package",
+    "publish": "npm run build && vsce publish",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.2",
+    "luaut-language-server": "file:../luaut-language-server",
+    "tsup": "^8.5.1",
+    "typescript": "^5.0.4",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Uav3537/luaut-vscode.git"
+  }
+}

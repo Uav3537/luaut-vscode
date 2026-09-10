@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "luaut",
+  "scopeName": "source.luaut",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#string" },
+    { "include": "#number" },
+    { "include": "#keyword" },
+    { "include": "#type-keyword" },
+    { "include": "#constant" },
+    { "include": "#declaration" },
+    { "include": "#call" },
+    { "include": "#operator" },
+    { "include": "#identifier" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        { "name": "comment.block.luaut", "begin": "--\[\[", "end": "\]\]" },
+        { "name": "comment.line.double-dash.luaut", "match": "--.*$" }
+      ]
+    },
+    "string": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.luaut",
+          "begin": "\"", "end": "\"",
+          "patterns": [{ "name": "constant.character.escape.luaut", "match": "\\." }]
+        },
+        {
+          "name": "string.quoted.single.luaut",
+          "begin": "'", "end": "'",
+          "patterns": [{ "name": "constant.character.escape.luaut", "match": "\\." }]
+        },
+        {
+          "name": "string.template.luaut",
+          "begin": "`", "end": "`",
+          "patterns": [
+            { "name": "constant.character.escape.luaut", "match": "\\." },
+            {
+              "name": "meta.embedded.luaut",
+              "begin": "\$\{", "end": "\}",
+              "beginCaptures": { "0": { "name": "punctuation.definition.template-expression.luaut" } },
+              "endCaptures": { "0": { "name": "punctuation.definition.template-expression.luaut" } },
+              "patterns": [{ "include": "$self" }]
+            }
+          ]
+        },
+        { "name": "string.quoted.other.luaut", "begin": "\[\[", "end": "\]\]" }
+      ]
+    },
+    "number": {
+      "name": "constant.numeric.luaut",
+      "match": "\b(0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(\.[0-9_]+)?([eE][+-]?[0-9]+)?)\b"
+    },
+    "keyword": {
+      "patterns": [
+        {
+          "name": "keyword.control.luaut",
+          "match": "\b(if|then|elseif|else|end|for|in|while|do|repeat|until|break|continue|return)\b"
+        },
+        {
+          "name": "keyword.declaration.luaut",
+          "match": "\b(const|let|function|type|declare|export|import|from|as)\b"
+        },
+        { "name": "keyword.operator.word.luaut", "match": "\b(and|or|not|satisfies|is|asserts|keyof|infer|readonly)\b" }
+      ]
+    },
+    "type-keyword": {
+      "name": "support.type.primitive.luaut",
+      "match": "\b(any|unknown|never|nil|boolean|number|string|thread|buffer|self)\b"
+    },
+    "constant": {
+      "name": "constant.language.luaut",
+      "match": "\b(true|false)\b"
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "match": "\b(function)\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "keyword.declaration.luaut" },
+            "2": { "name": "entity.name.function.luaut" }
+          }
+        },
+        {
+          "match": "\b(type)\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "keyword.declaration.luaut" },
+            "2": { "name": "entity.name.type.luaut" }
+          }
+        }
+      ]
+    },
+    "call": {
+      "match": "([A-Za-z_][A-Za-z0-9_]*)\s*(?=[({\"'`])",
+      "captures": { "1": { "name": "entity.name.function.call.luaut" } }
+    },
+    "operator": {
+      "name": "keyword.operator.luaut",
+      "match": "(\+|-|\*|/|//|%|\^|#|==|~=|<=|>=|<|>|=|\.\.\.|\.\.|->|\?|:|\|&)"
+    },
+    "identifier": {
+      "patterns": [
+        { "name": "variable.other.constant.luaut", "match": "\b[A-Z][A-Z0-9_]{2,}\b" },
+        { "name": "variable.other.luaut", "match": "\b[A-Za-z_][A-Za-z0-9_]*\b" }
+      ]
+    }
+  }
+}

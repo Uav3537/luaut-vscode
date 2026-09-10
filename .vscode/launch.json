@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}",
+                "${workspaceFolder}/sample"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.cjs"
+            ],
+            "preLaunchTask": "npm: build:linked"
+        },
+        {
+            "name": "Attach to server",
+            "type": "node",
+            "request": "attach",
+            "port": 6009,
+            "restart": true,
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.cjs"
+            ]
+        }
+    ]
+}
