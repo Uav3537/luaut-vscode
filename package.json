@@ -84,5 +84,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Uav3537/luaut-vscode.git"
-  }
+  },
+  "icon": "icon.png"
 }
