@@ -14,6 +14,12 @@
     "comment": {
       "patterns": [
         { "name": "comment.block.luaut", "begin": "--\\[(=*)\\[", "end": "\\]\\1\\]" },
+        {
+          "comment": "`--@luaut-nocheck` / `--@luaut-ignore` / `--@luaut-expect-error`: the directive word stands out, as `@ts-ignore` does.",
+          "name": "comment.line.double-dash.luaut",
+          "match": "--\\s*(@luaut-(?:nocheck|ignore|expect-error))\\b.*$",
+          "captures": { "1": { "name": "storage.type.class.jsdoc keyword.other.directive.luaut" } }
+        },
         { "name": "comment.line.double-dash.luaut", "match": "--.*$" }
       ]
     },

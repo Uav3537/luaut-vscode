@@ -11,8 +11,17 @@
     ],
     "surroundingPairs": [["{", "}"], ["[", "]"], ["(", ")"], ["\"", "\""], ["'", "'"], ["`", "`"]],
     "indentationRules": {
-        "increaseIndentPattern": "^\s*(else|elseif|do|then|repeat|.*\b(function|if|for|while)\b.*)\s*$|[{(\[]\s*$",
-        "decreaseIndentPattern": "^\s*(end|else|elseif|until|[}\)\]])"
+        "increaseIndentPattern": "^((?!--).)*((\\b(else|function|then|do|repeat)\\b((?!\\b(end|until)\\b).)*)|([\\{\\[\\(]\\s*))$",
+        "decreaseIndentPattern": "^\\s*((\\b(elseif|else|end|until)\\b)|[\\}\\]\\)])"
+    },
+    "onEnterRules": [
+        {
+            "beforeText": "^\\s*--\\s*@luaut-(ignore|expect-error)\\b.*$",
+            "action": { "indent": "none" }
+        }
+    ],
+    "folding": {
+        "markers": { "start": "^\\s*--\\s*#region\\b", "end": "^\\s*--\\s*#endregion\\b" }
     },
     "wordPattern": "[A-Za-z_][A-Za-z0-9_]*"
 }
