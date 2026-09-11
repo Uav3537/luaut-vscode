@@ -32,6 +32,12 @@
           "light": "./icon.png",
           "dark": "./icon.png"
         }
+      },
+      {
+        "id": "luaut-hover",
+        "aliases": [
+          "luaut-hover"
+        ]
       }
     ],
     "grammars": [
@@ -44,6 +50,22 @@
         "language": "luaut-hover",
         "scopeName": "source.luaut-hover",
         "path": "./syntaxes/luaut-hover.tmLanguage.json"
+      }
+    ],
+    "semanticTokenModifiers": [
+      {
+        "id": "control",
+        "description": "A control keyword, coloured like `export` or `return`."
+      }
+    ],
+    "semanticTokenScopes": [
+      {
+        "language": "luaut",
+        "scopes": {
+          "keyword.control": [
+            "keyword.control.luaut"
+          ]
+        }
       }
     ],
     "configuration": {
