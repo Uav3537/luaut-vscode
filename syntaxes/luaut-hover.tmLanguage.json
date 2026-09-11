@@ -43,7 +43,7 @@
           }
         },
         {
-          "match": "^\\((?:global|loop variable|import)\\)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "match": "^\\((?:global|loop variable|import|type import)\\)\\s+([A-Za-z_][A-Za-z0-9_]*)",
           "captures": { "1": { "name": "variable.other.readwrite.luaut-hover" } }
         }
       ]
