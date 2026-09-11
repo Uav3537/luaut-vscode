@@ -58,7 +58,7 @@
           }
         },
         {
-          "match": "\\b(declare)\\s+(class)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s+(extends)\\s+([A-Za-z_][A-Za-z0-9_]*))?",
+          "match": "\\b(declare)\\s+(class)\\s+([A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)?)(?:\\s+(extends)\\s+([A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)?))?",
           "captures": {
             "1": { "name": "storage.modifier.luaut-hover" },
             "2": { "name": "storage.type.class.luaut-hover" },
