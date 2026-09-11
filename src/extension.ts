@@ -9,6 +9,7 @@
 import { existsSync } from "node:fs"
 import { join } from "node:path"
 import * as vscode from "vscode"
+import { registerConfigCompletion } from "./config.js"
 import {
     LanguageClient, TransportKind,
     type LanguageClientOptions, type ServerOptions,
@@ -17,6 +18,8 @@ import {
 let client: LanguageClient | undefined
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
+    context.subscriptions.push(registerConfigCompletion())
+
     const module = resolveServer(context)
     if (!module) {
         void vscode.window.showErrorMessage(

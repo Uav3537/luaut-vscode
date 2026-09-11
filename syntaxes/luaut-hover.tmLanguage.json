@@ -43,7 +43,7 @@
           }
         },
         {
-          "match": "^\\((?:global|loop variable)\\)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "match": "^\\((?:global|loop variable|import)\\)\\s+([A-Za-z_][A-Za-z0-9_]*)",
           "captures": { "1": { "name": "variable.other.readwrite.luaut-hover" } }
         }
       ]
@@ -65,6 +65,13 @@
             "3": { "name": "entity.name.type.class.luaut-hover" },
             "4": { "name": "storage.modifier.luaut-hover" },
             "5": { "name": "entity.name.type.class.luaut-hover" }
+          }
+        },
+        {
+          "match": "^(function)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.function.luaut-hover" },
+            "2": { "name": "entity.name.function.luaut-hover" }
           }
         },
         {

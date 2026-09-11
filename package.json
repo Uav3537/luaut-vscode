@@ -2,7 +2,7 @@
   "name": "luaut-vscode",
   "displayName": "luaut",
   "description": "luaut language support — diagnostics, hover, completion, go-to-definition",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "publisher": "uav1010",
   "license": "ISC",
   "engines": {
@@ -13,7 +13,9 @@
   ],
   "main": "./dist/extension.cjs",
   "activationEvents": [
-    "onLanguage:luaut"
+    "onLanguage:luaut",
+    "workspaceContains:**/luaut.config.json",
+    "workspaceContains:**/luaut.config.jsonc"
   ],
   "contributes": {
     "languages": [
@@ -127,7 +129,7 @@
     "@types/node": "^22.20.2",
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^3.9.2",
-    "luaut-language-server": "^2.1.0",
+    "luaut-language-server": "^3.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5.0.4",
     "vscode-languageclient": "^9.0.1"

@@ -72,7 +72,11 @@
         },
         { "name": "storage.type.luaut", "match": "\\b(const|let|function)\\b" },
         { "name": "keyword.control.import.luaut", "match": "\\b(import|export|from|as)\\b" },
-        { "name": "keyword.operator.word.luaut", "match": "\\b(and|or|not)\\b" }
+        {
+          "comment": "The scope TypeScript gives `typeof` and `in`: themes colour it as a keyword, where plain keyword.operator is left white.",
+          "name": "keyword.operator.expression.luaut",
+          "match": "\\b(and|or|not)\\b"
+        }
       ]
     },
     "constant": {
