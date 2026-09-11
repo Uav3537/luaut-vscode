@@ -58,6 +58,16 @@
           }
         },
         {
+          "match": "\\b(declare)\\s+(class)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s+(extends)\\s+([A-Za-z_][A-Za-z0-9_]*))?",
+          "captures": {
+            "1": { "name": "storage.modifier.luaut-hover" },
+            "2": { "name": "storage.type.class.luaut-hover" },
+            "3": { "name": "entity.name.type.class.luaut-hover" },
+            "4": { "name": "storage.modifier.luaut-hover" },
+            "5": { "name": "entity.name.type.class.luaut-hover" }
+          }
+        },
+        {
           "match": "\\b(declare)\\s+(function)\\s+([A-Za-z_][A-Za-z0-9_]*)",
           "captures": {
             "1": { "name": "storage.modifier.luaut-hover" },
