@@ -40,10 +40,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const options: LanguageClientOptions = {
         documentSelector: [{ scheme: "file", language: "luaut" }],
         outputChannel: vscode.window.createOutputChannel("luaut"),
-        // A module changed, created or deleted outside the editor can change
-        // the types of every file importing it, so the server hears about it.
+        // A module, `luaut.config.json`, type library or sourcemap changed,
+        // created or deleted outside the editor can change the types of every
+        // file that uses it, so the server hears about all of them.
         synchronize: {
-            fileEvents: vscode.workspace.createFileSystemWatcher("**/*.luaut"),
+            fileEvents: vscode.workspace.createFileSystemWatcher("**/*.{luaut,json,jsonc}"),
         },
     }
 

@@ -38,6 +38,12 @@
         "aliases": [
           "luaut-hover"
         ]
+      },
+      {
+        "id": "jsonc",
+        "filenames": [
+          "luaut.config.json"
+        ]
       }
     ],
     "grammars": [
@@ -50,6 +56,15 @@
         "language": "luaut-hover",
         "scopeName": "source.luaut-hover",
         "path": "./syntaxes/luaut-hover.tmLanguage.json"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": [
+          "luaut.config.json",
+          "luaut.config.jsonc"
+        ],
+        "url": "./schemas/luaut.config.schema.json"
       }
     ],
     "semanticTokenModifiers": [

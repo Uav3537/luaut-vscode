@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "luaut project configuration",
+  "description": "Applies to every .luaut file in this folder and the folders below it, unless a nearer luaut.config.json takes over.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "types": {
+      "description": "Type libraries to load. Nothing is built in — not even `print` — so list what the project uses. A name is looked up as @luaut/<name>, then as a package of that name; a full package name or a relative path works too.",
+      "type": "array",
+      "items": { "type": "string" },
+      "default": ["luau"],
+      "examples": [["luau"], ["roblox"], ["roblox", "./types"]]
+    },
+    "paths": {
+      "description": "Import path aliases, as in tsconfig. A pattern may contain one `*`; targets resolve from baseUrl.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "default": {},
+      "examples": [{ "@shared/*": ["src/shared/*"] }]
+    },
+    "baseUrl": {
+      "description": "Where `paths` targets resolve from. Defaults to this config's folder.",
+      "type": "string"
+    },
+    "sourceMap": {
+      "description": "A Rojo sourcemap (`rojo sourcemap -o sourcemap.json`). When set, `game`, `workspace` and each file's `script` are typed from the real instance tree. null for none.",
+      "type": ["string", "null"],
+      "default": null,
+      "examples": ["sourcemap.json"]
+    }
+  }
+}
