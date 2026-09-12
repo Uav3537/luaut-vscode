@@ -6,22 +6,18 @@
   "additionalProperties": false,
   "defaultSnippets": [
     {
-      "label": "Roblox project",
-      "description": "Roblox types, no aliases, no sourcemap",
+      "label": "luaut project",
+      "description": "No type libraries yet, no aliases, no sourcemap",
       "body": {
-        "types": [
-          "roblox"
-        ],
+        "types": [],
         "paths": {},
         "sourceMap": null
       }
     },
     {
-      "label": "Roblox project with a Rojo sourcemap",
+      "label": "luaut project with aliases and a sourcemap",
       "body": {
-        "types": [
-          "roblox"
-        ],
+        "types": [],
         "paths": {
           "@shared/*": [
             "src/shared/*"
@@ -33,23 +29,12 @@
   ],
   "properties": {
     "types": {
-      "markdownDescription": "Type libraries to load. Nothing is built in — not even `print` — so list what the project uses.\n\nA name is looked up as the package `@luaut/<name>` (`\"roblox\"` loads `@luaut/roblox`); a library that is not installed is an error. A relative path (`\"./types\"`, `\"./defs.d.luaut\"`) loads the project's own definitions.",
+      "markdownDescription": "Type libraries to load, in order. Nothing is built in — not even `print` — so list the ones this project has installed.\n\nA plain name is looked up as the package `@luaut/<name>`, then as a package of that name; a full package name works too. A library that is not installed is an error. A relative path (`\"./types\"`, `\"./defs.d.luaut\"`) loads the project's own definitions. A library's own dependencies load before it.",
       "type": "array",
       "items": {
         "type": "string"
       },
-      "uniqueItems": true,
-      "default": [
-        "roblox"
-      ],
-      "defaultSnippets": [
-        {
-          "label": "[\"roblox\"]",
-          "body": [
-            "roblox"
-          ]
-        }
-      ]
+      "uniqueItems": true
     },
     "paths": {
       "markdownDescription": "Import path aliases, as in tsconfig. A pattern may contain one `*`, which stands for the same text in each target. Targets resolve from `baseUrl`.\n\n```json\n\"paths\": { \"@shared/*\": [\"src/shared/*\"] }\n```",

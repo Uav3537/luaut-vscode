@@ -4,18 +4,13 @@
  * The JSON schema already offers the options and their documentation. What it
  * cannot know is which type libraries a project has: inside `"types": [...]`
  * this suggests every `@luaut/*` package installed in `node_modules` above the
- * config, and the official ones that are not installed yet, with the command
- * that installs them.
+ * config, and nothing else. Which libraries exist is not this extension's
+ * business — a name in `types` is whatever the project installed, looked up as
+ * `@luaut/<name>`.
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import * as vscode from "vscode"
-
-/** Libraries worth suggesting even before they are installed. */
-const KNOWN: Record<string, string> = {
-    roblox: "The whole Roblox API: every class, enum, data type and global",
-    luau: "The Luau standard library (roblox brings it along)",
-}
 
 export function registerConfigCompletion(): vscode.Disposable {
     return vscode.languages.registerCompletionItemProvider(
@@ -32,20 +27,11 @@ export function registerConfigCompletion(): vscode.Disposable {
                 const installed = installedLibraries(dirname(document.uri.fsPath))
 
                 const items: vscode.CompletionItem[] = []
-                const names = new Set([...installed.keys(), ...Object.keys(KNOWN)])
-                for (const name of names) {
+                for (const [name, description] of installed) {
                     if (listed.has(name)) continue
                     const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Module)
-                    const description = installed.get(name)
-                    if (description !== undefined) {
-                        item.detail = `@luaut/${name}`
-                        item.documentation = description || KNOWN[name]
-                        item.sortText = `0${name}`
-                    } else {
-                        item.detail = `@luaut/${name} — not installed`
-                        item.documentation = new vscode.MarkdownString(`${KNOWN[name]}\n\n\`npm i -D @luaut/${name}\``)
-                        item.sortText = `1${name}`
-                    }
+                    item.detail = `@luaut/${name}`
+                    if (description) item.documentation = description
                     item.insertText = inString ? name : `"${name}"`
                     items.push(item)
                 }
